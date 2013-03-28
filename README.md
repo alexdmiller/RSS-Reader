@@ -1,0 +1,1 @@
+A simple web-based RSS reader. Just a hobby project, nothing more.
