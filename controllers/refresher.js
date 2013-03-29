@@ -17,9 +17,9 @@ FeedRefresher.prototype.forceRefresh = function() {
 FeedRefresher.prototype.readFeeds = function(db) {
   // get all of the feeds we subscribe to
   db.each("SELECT * FROM feeds", function(err, row) {
+    console.log("refreshing " + row.feed_url);
     var lastDate = row.last_update ? new Date(row.last_update) : new Date(0);
     var now = new Date();
-    console.log("Refreshing: " + row.name);
     request(row.feed_url).pipe(new FeedParser())
       .on('article', function(article) {
         // test to see if the date of the article is after the last time
@@ -27,6 +27,7 @@ FeedRefresher.prototype.readFeeds = function(db) {
         // it as unread.
         var articleDate = new Date(article['atom:updated']['#']);
         if (articleDate > lastDate) {
+          console.log('adding article to database (time = ' + articleDate + ')');
           db.run('INSERT into posts (feed_id, title, body, category, timestamp) values' +
             '(?, ?, ?, "unread", ?)', row.feed_id, article.title, article.description, articleDate);
         }

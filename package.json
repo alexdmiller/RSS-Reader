@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "express": "3.x",
-    "ejs": "*", 
+    "ejs": "0.8.3", 
     "feedparser": "*",
     "request": "*",
     "sqlite3": "*"

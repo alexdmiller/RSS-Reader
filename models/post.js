@@ -13,7 +13,7 @@ Post.init = function(db) {
 };
 
 Post.all = function(callback) {
-  Post.db.all('SELECT * FROM posts', function(err, rows) {
+  Post.db.all('SELECT * FROM posts ORDER BY timestamp DESC', function(err, rows) {
     var result = [];
     for (var i = 0; i < rows.length; i++) {
       result.push(new Post(rows[i]));

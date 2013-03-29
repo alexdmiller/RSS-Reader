@@ -12,8 +12,9 @@ var refresher = new FeedRefresher(db);
 Post.init(db);
 
 // check for new posts every 10 seconds
-refresher.forceRefresh();
-refresher.start(100000);
+//refresher.forceRefresh();
+//refresher.start(100000);
+
 
 var controllers = ['post_controller'];
 controllers.forEach(function(item) {

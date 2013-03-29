@@ -7,7 +7,7 @@ function PostController() {
 
 PostController.prototype.all = function(err, res) {
   Post.all(function(result) {
-    res.render('posts', {posts: result});
+    res.render('posts', {posts: result, message: "hello!"});
   });
 };
 
