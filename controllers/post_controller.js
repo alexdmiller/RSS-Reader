@@ -7,13 +7,13 @@ function PostController() {
 
 PostController.prototype.all = function(req, res) {
   Post.all(function(result) {
-    res.render('posts', {posts: result});
+    res.render('post/list', {posts: result});
   });
 };
 
 PostController.prototype.post = function(req, res) {
   Post.find(req.params.id, function(post) {
-    res.render('post', {post: post});
+    res.render('post/show', {post: post});
   });
 };
 
@@ -25,16 +25,16 @@ PostController.prototype.feed = function(req, res) {
 
 };
 
-PostController.prototype.unreadForFeed = function(req, res) {
-
-};
-
 PostController.prototype.setCategory = function(req, res) {
 
 };
 
 PostController.prototype.destroy = function(req, res) {
-
+  Post.find(req.params.id, function(post) {
+    post.remove(function() {
+      res.send('Post removed.');
+    });
+  });
 };
 
 exports.setup = function(app) {

@@ -97,7 +97,7 @@ Post.prototype.save = function(callback) {
 };
 
 Post.prototype.remove = function(callback) {
-  // TODO
+  Post.db.execute('DELETE FROM posts WHERE post_id = ?', this.id, callback);
 };
 
 Post.prototype.feed = function(callback) {
