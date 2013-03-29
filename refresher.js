@@ -10,6 +10,10 @@ FeedRefresher.prototype.start = function(interval) {
   this.timer = setInterval(this.readFeeds, interval, this.db);
 };
 
+FeedRefresher.prototype.forceRefresh = function() {
+  this.readFeeds(this.db);
+};
+
 FeedRefresher.prototype.readFeeds = function(db) {
   // get all of the feeds we subscribe to
   db.each("SELECT * FROM feeds", function(err, row) {
