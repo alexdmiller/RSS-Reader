@@ -31,6 +31,7 @@ function main() {
   // check for new posts every 10 seconds
   console.log("starting refresher.");
   refresher.forceRefresh();
+  // TODO: factor out refresh rate into config file
   refresher.start(100000);
 
   // web app

@@ -28,6 +28,18 @@ Post.all = function(callback) {
   });
 };
 
+Post.find = function(id, callback) {
+  Post.db.get('SELECT * FROM posts WHERE post_id = ?', id, function(err, row) {
+    var post = new Post({
+      id: row.post_id,
+      title: row.title,
+      body: row.body,
+      timestamp: row.timestamp
+    });
+    callback(post);
+  });
+};
+
 Post.category = function(category, callback) {
   Post.db.all('SELECT * FROM posts WHERE category = ?', category, function(err, rows) {
     var result = [];
