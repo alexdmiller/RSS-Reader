@@ -1,8 +1,8 @@
 <div>
   <% for (var i = 0; i < posts.length; i++) { %>
-    <h2><%= posts[i].title %></h2>
+    <h2><%- posts[i].title %></h2>
     <div>
-      <%= posts[i].body %>
+      <%- posts[i].body %>
     </div>
   <% } %>
 </div> 
