@@ -1,6 +1,8 @@
 var FeedParser  = require('feedparser'),
     request = require('request'),
-    sqlite3 = require('sqlite3').verbose();
+    sqlite3 = require('sqlite3').verbose(),
+    Post = require('../models/post');
+
 
 function FeedRefresher(db) {
   this.db = db;
@@ -28,8 +30,13 @@ FeedRefresher.prototype.readFeeds = function(db) {
         var articleDate = new Date(article['atom:updated']['#']);
         if (articleDate > lastDate) {
           console.log('adding article to database (time = ' + articleDate + ')');
-          db.run('INSERT into posts (feed_id, title, body, category, timestamp) values' +
-            '(?, ?, ?, "unread", ?)', row.feed_id, article.title, article.description, articleDate);
+          var post = new Post({
+            title: article.title,
+            body: article.description,
+            timestamp: articleDate,
+            feed_id: row.feed_id
+          });
+          post.save();
         }
       })
       .on('end', function() {

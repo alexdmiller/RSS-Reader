@@ -2,7 +2,7 @@ var Post = require('../models/post');
 var express = require('express');
 
 function PostController() {
-  
+  // ??
 }
 
 PostController.prototype.all = function(err, res) {
