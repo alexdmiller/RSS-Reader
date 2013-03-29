@@ -3,4 +3,4 @@ var FeedRefresher = require('./refresher.js');
 
 var db = new sqlite3.Database('news.db');
 var refresher = new FeedRefresher(db);
-refresher.readFeeds();
+refresher.start(10000);

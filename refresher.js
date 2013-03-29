@@ -7,11 +7,10 @@ function FeedRefresher(db) {
 }
 
 FeedRefresher.prototype.start = function(interval) {
-
+  this.timer = setInterval(this.readFeeds, interval, this.db);
 };
 
-FeedRefresher.prototype.readFeeds = function() {
-  var db = this.db;
+FeedRefresher.prototype.readFeeds = function(db) {
   // get all of the feeds we subscribe to
   db.each("SELECT * FROM feeds", function(err, row) {
     var lastDate = row.last_update ? new Date(row.last_update) : new Date(0);
