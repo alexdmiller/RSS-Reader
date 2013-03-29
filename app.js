@@ -2,8 +2,8 @@ var sqlite3 = require('sqlite3').verbose();
 var express = require('express');
 var app = express();
 
-var FeedRefresher = require('./refresher.js');
-var Post = require('./post.js');
+var FeedRefresher = require('./controllers/refresher.js');
+var Post = require('./models/post.js');
 
 // create database and initialize modules
 var db = new sqlite3.Database('news.db');
@@ -15,13 +15,12 @@ Post.init(db);
 refresher.forceRefresh();
 refresher.start(100000);
 
-// web app
-app.set('view engine', 'ejs');
-
-app.get('/posts', function(req, res) {
-  Post.all(function(result) {
-    res.render('posts', {posts: result});
-  });
+var controllers = ['post_controller'];
+controllers.forEach(function(item) {
+  var controller = require('./controllers/' + item);
+  controller.setup(app);
 });
 
+// web app
+app.set('view engine', 'ejs');
 app.listen(3000);
