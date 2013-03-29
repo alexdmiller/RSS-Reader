@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "express": "3.x",
-    "ejs": "0.8.3", 
+    "ejs": "0.8.3",
     "feedparser": "*",
     "request": "*",
-    "sqlite3": "*"
+    "sqlite3": "*",
+    "ejs-locals": "~1.0.2"
   }
 }

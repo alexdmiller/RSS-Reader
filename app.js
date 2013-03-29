@@ -1,5 +1,6 @@
 var sqlite3 = require('sqlite3').verbose();
 var express = require('express');
+var engine = require('ejs-locals');
 var app = express();
 
 var FeedRefresher = require('./controllers/refresher.js');
@@ -40,7 +41,9 @@ function main() {
     var controller = require('./controllers/' + item);
     controller.setup(app);
   });
+  app.engine('ejs', engine);
   app.set('view engine', 'ejs');
+  app.use('/static', express.static(__dirname + '/public'));
   console.log("starting web app on port " + 3000  + ".");
   // TODO: factor our port into config file
   app.listen(3000);
