@@ -29,7 +29,6 @@ FeedRefresher.prototype.readFeeds = function(db) {
         // it as unread.
         var articleDate = new Date(article['atom:updated']['#']);
         if (articleDate > lastDate) {
-          console.log('adding article to database (time = ' + articleDate + ')');
           var post = new Post({
             title: article.title,
             body: article.description,

@@ -83,11 +83,13 @@ Post.prototype.save = function(callback) {
   // If the post has no ID yet, we need to insert
   var that = this;
   if (this.id === undefined) {
-    Post.db.run('INSERT into posts (feed_id, title, body, category, timestamp) values' +
-        '(?, ?, ?, "unread", ?)', this.feed_id, this.title, this.body, this.timestamp,
+    Post.db.run('INSERT into posts (title, body, category, timestamp) values' +
+        '(?, ?, "unread", ?)', this.title, this.body, this.timestamp,
         function() {
           that.id = this.lastID;
-          callback();
+          if (callback) {
+            callback();
+          }
         });
   } else {
     // Otherwise we should update
