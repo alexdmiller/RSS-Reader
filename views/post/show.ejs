@@ -1,7 +1,10 @@
 <% layout('../layout') -%>
 <div class="post">
-  <h2><%- post.title %></h2>
-  <div>
+  <h3><%- post.title %></h3>
+  <div class="post-body">
     <%- post.body %>
+  </div>
+  <div class="post-actions">
+    <button data-post-id="<%= post.id %>" class="btn delete-button">Delete</button>
   </div>
 </div>

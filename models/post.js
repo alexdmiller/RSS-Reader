@@ -30,12 +30,7 @@ Post.all = function(callback) {
 
 Post.find = function(id, callback) {
   Post.db.get('SELECT * FROM posts WHERE post_id = ?', id, function(err, row) {
-    var post = new Post({
-      id: row.post_id,
-      title: row.title,
-      body: row.body,
-      timestamp: row.timestamp
-    });
+    var post = new Post(row);
     callback(post);
   });
 };
@@ -99,7 +94,7 @@ Post.prototype.save = function(callback) {
 };
 
 Post.prototype.remove = function(callback) {
-  Post.db.execute('DELETE FROM posts WHERE post_id = ?', this.id, callback);
+  Post.db.run('DELETE FROM posts WHERE post_id = ?', this.id, callback);
 };
 
 Post.prototype.feed = function(callback) {

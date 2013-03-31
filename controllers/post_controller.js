@@ -41,7 +41,7 @@ exports.setup = function(app) {
   var controller = new PostController();
   app.get('/post/:id', controller.post);
   app.post('/post/:id/:category', controller.setCategory);
-  app.del('/post/:id', controller.destroy);
+  app.post('/delete_post/:id', controller.destroy);
   app.get('/posts', controller.all);
   app.get('/posts/:category', controller.category);
 };
